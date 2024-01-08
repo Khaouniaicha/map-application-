@@ -1,0 +1,25 @@
+{
+  "name": "aktionskarten-marker",
+  "version": "1.0.2",
+  "description": "AktionskartenMarker used by aktionskarten.org",
+  "main": "AktionskartenMarker.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint --ext .js . "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aktionskarten/AktionskartenMarker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aktionskarten/AktionskartenMarker/issues"
+  },
+  "homepage": "https://github.com/aktionskarten/AktionskartenMarker#readme",
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
+  }
+}

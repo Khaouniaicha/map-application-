@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="CodeHim">
+  <title>Mapper</title>
+
+  <link rel="stylesheet" href="../static/example_style/css/style.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Great+Vibes&amp;display=swap'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&amp;display=swap'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-styleeditor@0.1.21/dist/javascript/Leaflet.StyleEditor.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-styleeditor@0.1.21/dist/css/Leaflet.StyleEditor.min.css">
+
+  <script src="https://unpkg.com/georaster"></script>
+  <script src="https://unpkg.com/proj4"></script>
+  <script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
+  <script src="https://unpkg.com/shpjs@latest/dist/shp.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-styleeditor@0.1.21/dist/javascript/Leaflet.StyleEditor.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-styleeditor@0.1.21/dist/css/Leaflet.StyleEditor.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-geometryutil@0.10.3/src/leaflet.geometryutil.min.js"></script>
+  <script src="../static/example_style/AktionskartenMarker.js"></script>
+  <link rel="stylesheet" href="../static/example_style/AktionskartenMarker.css" />
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/togeojson@0.16.0/togeojson.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.1.5/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-filelayer@1.2.0/src/leaflet.filelayer.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+</head>
+
+<body>
+
+  <form name="tiff-parser" method="post" enctype="multipart/form-data">
+    <input type="file" name="geotiff-file" id="geotiff-file" accept="image/tiff" required style="display: none;" onchange="loadGeoTIFF();" />
+  </form>
+
+  <form name="shapefile-form" method="post" enctype="multipart/form-data">
+    <input type="file" name="shapefile-file" id="shapefile-file" accept=".zip" required style="display: none;" onchange="loadShapefile();" />
+  </form>
+
+  <form name="geojson-form" method="post" enctype="multipart/form-data">
+    <input type="file" name="geojson-file" id="geojson-file" accept=".geojson" required style="display: none;" onchange="loadGeoJSON();" />
+  </form>
+
+<form name="csv-parser" method="post" enctype="multipart/form-data">
+<input type="file" name="csv-file" id="csv-file" accept=".csv" required style="display: none;" onchange="loadcsv();" />
+</form>
+
+<nav class="navbar">
+  <a href="mapp.html" class="navbar-logo"><i class="material-icons">map</i> Mapper</a>
+  <ul class="navbar-links">
+    <li class="nav-item active">
+      <a class="nav-link" href="/">Accueil <span class="sr-only"></span></a>
+    </li>
+    
+    <li class="navbar-dropdown" id="loadDropdown">
+      <a href="#" onclick="toggleDropdown('loadDropdown')">Charger</a>
+      <div class="dropdown">
+          <label for="geotiff-file" style="cursor: pointer;">Raster</label><br>
+        <label for="shapefile-file" style="cursor: pointer;"> ShapeFile </label><br>
+        <label for="geojson-file" style="cursor: pointer;">Geojson</label>
+        <label for="csv-file" style="cursor: pointer;">CSV</label>
+      </div>
+    </li>
+    <li class="navbar-dropdown" id="analysesDropdown">
+      <a href="#" onclick="toggleDropdown('analysesDropdown')">Analyses Spatiales</a>
+    </li>
+    <li class="navbar-dropdown" id="editingDropdown">
+      <a href="#" onclick="toggleDropdown('editingDropdown')">Édition</a>
+      <div class="dropdown">
+        <a href="#" onclick="setupDrawControl()">Commencer l'édition </a>
+        <a href="#" onclick="endEditing()">Arrêter l'édition </a>
+        <a href="#" onclick="saveData()">Enregistrer </a>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<div id="map"></div>
+<div id="sidebar" draggable="true" ondragstart="dragStart(event)" ondragover="allowDrop(event)" ondrag="dragging(event)">
+  <span id="close-btn" onclick="closeSidebar()">✖</span>
+  <h2>Données CSV</h2>
+  <div id="csv-table"></div>
+</div>
+
+<script src="../static/js/mapp.js"></script>
+</body>
+
+</html>
