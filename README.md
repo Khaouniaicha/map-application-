@@ -18,11 +18,7 @@
     .\env\scripts\activate
     ```
 
-4. Installez les dépendances :
 
-    ```bash
-    pip install -r requirements.txt
-    ```
 
 ## Utilisation
 
