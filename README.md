@@ -46,5 +46,5 @@
 
 - `app.py`: Fichier principal de l'application.
 - `templates/`: Dossier contenant les fichiers HTML.
-- `confg.json`: Fichier de configuration Firebase.
+- `firebase.json`: Fichier de configuration Firebase.
 - `requirements.txt`: Liste des dépendances.
