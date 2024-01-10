@@ -13,28 +13,7 @@
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&amp;display=swap'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
-    <!-- LEAFLET SOURCE    -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
-          integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
-            integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- Dependency to Leaflet Draw -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"
-          integrity="sha512-gc3xjCmIy673V6MyOAZhIW93xhM9ei1I+gLbmFjUHIjocENRsLX/QUE1htk5q1XV2D/iie/VQ8DXI6Vu8bexvQ=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"
-            integrity="sha512-ozq8xQKq6urvuU6jNgkfqAmT7jKN2XumbrX1JiB3TnF7tI48DPI4Gy1GXKD/V3EExgAs1V+pRO7vwtS1LHg0Gw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- Leaflet QgsMeasure -->
-    <script type="application/javascript"
-            src="https://unpkg.com/leaflet-qgsmeasure@0.0.8/dist/leaflet.qgsmeasure.min.js"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-qgsmeasure@0.0.8/dist/leaflet.qgsmeasure.css"
-          crossorigin="anonymous" referrerpolicy="no-referrer">
   <script src="https://cdn.jsdelivr.net/npm/leaflet-styleeditor@0.1.21/dist/javascript/Leaflet.StyleEditor.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-styleeditor@0.1.21/dist/css/Leaflet.StyleEditor.min.css">
 
@@ -51,8 +30,12 @@
   <script src="https://cdn.jsdelivr.net/npm/leaflet-geometryutil@0.10.3/src/leaflet.geometryutil.min.js"></script>
   <script src="../static/example_style/AktionskartenMarker.js"></script>
   <link rel="stylesheet" href="../static/example_style/AktionskartenMarker.css" />
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+  <!-- Load Esri Leaflet Geocoder from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.css" crossorigin="" />
+  <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.js" crossorigin=""></script>
 
-  
   <script src="https://cdn.jsdelivr.net/npm/togeojson@0.16.0/togeojson.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.1.5/dist/jszip.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/leaflet-filelayer@1.2.0/src/leaflet.filelayer.min.js"></script>
@@ -79,7 +62,7 @@
 </form>
 
 <nav class="navbar">
-  <a href="mapp.html" class="navbar-logo"><i class="material-icons">map</i> Mapper</a>
+  <a href="mapp" class="navbar-logo"><i class="material-icons">map</i> Mapper</a>
   <ul class="navbar-links">
     <li class="nav-item active">
       <a class="nav-link" href="/">Accueil <span class="sr-only"></span></a>
@@ -96,6 +79,10 @@
     </li>
     <li class="navbar-dropdown" id="analysesDropdown">
       <a href="#" onclick="toggleDropdown('analysesDropdown')">Analyses Spatiales</a>
+      <div class="dropdown">
+        
+        <a href="#" onclick="toggleSearchControl()">Search</a>
+    </div>
     </li>
     <li class="navbar-dropdown" id="editingDropdown">
       <a href="#" onclick="toggleDropdown('editingDropdown')">Édition</a>
