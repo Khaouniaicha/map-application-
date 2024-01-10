@@ -1,6 +1,4 @@
-
-  let map;
-  
+ let map;
   var drawnItems;
         var styleEditor;
         var drawControl;
@@ -8,13 +6,13 @@
    var loadedLayers = {};
    var newLayers = [];
     let offsetX, offsetY;
+    let searchControl; 
 
   map = L.map('map').setView([20, -40], 3);
   L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
-  L.Control.qgsmeasure()
-    .addTo(map);
+
  
 // Basemap Layers
 const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -46,6 +44,71 @@ const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
     // Default Basemap Layer
     osmLayer.addTo(map);
   
+    const apiKey = "AAPK15ec2d4df4ae4789932892da7ff1d9fbHCbJ3nM1FZ9B93MyECNimKHpQSFx-UnFZa1TZE_89Dxt0tcAHxCLDkd63DpiiP36"; 
+
+    function setupMap() {
+      const results = L.layerGroup().addTo(map);
+
+      searchControl = L.esri.Geocoding.geosearch({
+        position: "bottomright",
+        placeholder: "Enter an address or place e.g. 1 York St",
+        useMapBounds: false,
+        providers: [
+          L.esri.Geocoding.arcgisOnlineProvider({
+            apikey: apiKey,
+            nearby: {
+              lat: -33.8688,
+              lng: 151.2093
+            }
+          })
+        ]
+      }).addTo(map);
+
+      searchControl.on("results", function (data) {
+        results.clearLayers();
+        for (let i = data.results.length - 1; i >= 0; i--) {
+          results.addLayer(L.marker(data.results[i].latlng));
+        }
+      });
+    }
+
+    function toggleSearchControl() {
+      if (searchControl) {
+        map.removeControl(searchControl);
+        searchControl = null;
+        clearLayers();
+      } else {
+        setupMap();
+      }
+    }
+
+    function clearLayers() {
+      // Clear all layers from the map
+      map.eachLayer((layer) => {
+        if (layer instanceof L.Marker) {
+          map.removeLayer(layer);
+        }
+      });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     function addToLayerControl(layer) {
@@ -109,6 +172,7 @@ const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
     }
 
   
+
 
 
    
